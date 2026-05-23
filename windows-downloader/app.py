@@ -7,6 +7,15 @@ import re
 import time
 from pathlib import Path
 from datetime import datetime
+import asyncio
+
+# ═══════════════════════════════════════════════
+# FIX FOR WINDOWS ASYNCIO ERROR (WinError 10054)
+# ═══════════════════════════════════════════════
+if sys.platform == "win32":
+    # Force SelectorEventLoop to avoid ProactorEventLoop pipe errors
+    # This prevents the "connection forcibly closed" error after downloads
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 # ═══════════════════════════════════════════════
 # CONFIGURATION
